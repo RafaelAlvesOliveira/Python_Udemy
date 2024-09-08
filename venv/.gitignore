@@ -6,6 +6,8 @@
 .metadata_never_index
 .fseventsd/
 boot_out.txt
+.txt
+
 
 ### Executable ###
 *.app
@@ -454,6 +456,8 @@ poetry.toml
 launch.json
 settings.json
 env.json
+cspell.json
+.cspell
 
 ### venv ###
 # Virtualenv

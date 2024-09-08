@@ -1,0 +1,16 @@
+{
+    "cSpell.ignoreWords": [
+        "pesquisada"
+    ],
+    "cSpell.words": [
+        "regular"
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:PYTHON_UDEMY}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
+}

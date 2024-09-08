@@ -22,4 +22,4 @@ print(2, "Rafael 'Alves'")
 print("Rafael \"Alves\"")
 
 # r
-print(r"Rafael \"Alves\" ")
+print(r"Rafael \"Alves\"")

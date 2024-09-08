@@ -1,0 +1,30 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "alguma",
+        "busca",
+        "coisa",
+        "compilar",
+        "dentro",
+        "expressão",
+        "expressões",
+        "ocorrência",
+        "ocorrências",
+        "precisa",
+        "primeira",
+        "regular",
+        "regulares",
+        "retrnar",
+        "reutilizar",
+        "substituir",
+        "teste",
+        "texto",
+        "todas",
+        "útil"
+    ],
+    "ignoreWords": [],
+    "import": []
+}
