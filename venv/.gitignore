@@ -456,8 +456,7 @@ poetry.toml
 launch.json
 settings.json
 env.json
-cspell.json
-.cspell
+
 
 ### venv ###
 # Virtualenv
@@ -470,8 +469,14 @@ cspell.json
 [Ss]cripts
 pyvenv.cfg
 pip-selfcheck.json
+venv
 
 # Others
 cspell.json
+.cspell
+.vscode
+.gitignore
+.cspell/custom-dictionary-workspace.txt
+
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pythonvanilla,circuitpython,executable,jsonnet,stdlib,venv,pycharm,pycharm+iml,pycharm+all
