@@ -10,4 +10,4 @@ linha_3 = f'{imc:.2f}'
 
 print(linha_1)
 print(linha_2)
-print(imc)
+print(linha_3)
