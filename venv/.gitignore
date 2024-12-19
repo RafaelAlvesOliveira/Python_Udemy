@@ -475,6 +475,7 @@ venv
 cspell.json
 .cspell
 .vscode
+.vscode/settings.json
 .gitignore
 .cspell/custom-dictionary-workspace.txt
 

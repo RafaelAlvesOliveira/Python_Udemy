@@ -29,6 +29,7 @@
         "incorreta",
         "Interpolação",
         "iteráveis",
+        "Limpa",
         "lógicos",
         "nada",
         "naquele",
@@ -52,5 +53,7 @@
             "addWords": true,
             "scope": "workspace"
         }
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true
 }
