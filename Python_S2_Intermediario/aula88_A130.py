@@ -1,5 +1,8 @@
 # Exemplo de uso dos sets
 
+# O objetivo é armazenar palavras ou números
+# dentro do conjunto
+
 letras = set()
 while True:
     letra = input('Digite: ')
