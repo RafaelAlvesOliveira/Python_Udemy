@@ -8,7 +8,7 @@ Introdução ao desempacotamento + tuples (tuplas)
 # nome1, nome2, nome3, nome4 = ['Maria', 'Helena', 'Luiz']
 
 # # Se houver menos variáveis do que a quantidade de valores
-# o python irá apresentar um erro. E o contrário também, se 
+# o python irá apresentar um erro. E o contrário também, se
 # houver mais variáveis do que valores será apresentado outro
 # erro.
 
