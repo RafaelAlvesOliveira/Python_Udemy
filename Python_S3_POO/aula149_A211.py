@@ -17,7 +17,8 @@ class Connection:
         self.password = password
 
 # Toda vez que preciso utilizar qualquer método com "self", qualquer
-# coisa.
+# coisa, esse é um método de instância. Não sendo possível fazer isso
+# de outra forma.
 
     # @classmethod
     # def create_with_auth(cls, user, password):

@@ -27,6 +27,10 @@ class Caneta:
     def cor_tampa(self):
         return 123456
 
+# Usar @property ajuda a evitar a quebra de código
+# pois é possível proteger um atributo dentro da classe.
+# Pode ser utilizado no lugar do getter, pois faz o método
+# ou função se comportar como um atributo.
 
 ##############################
 

@@ -14,13 +14,19 @@ class Caneta:
     @property
     def cor(self):
         # print('PROPERTY')
+        print('Estou no Getter')
         return self._cor
 
     @cor.setter
     def cor(self, valor):
         # if valor == 'Rosa':
         #     raise ValueError('Não aceito essa cor')
+        # print('Estou no Setter', valor)
+        print('Estou no Setter')
         self._cor = valor
+
+# Para ter um setter é necessário ter uma @property.
+# Tem que ter o .self
 
     @property
     def cor_tampa(self):
@@ -34,14 +40,15 @@ class Caneta:
 # def mostrar(caneta):
 #     return caneta.cor
 
+# Setter é usado para configurar valores diferentes
+# para um determinado atributo.
 
 caneta = Caneta('Azul')
 caneta.cor = 'Rosa'
-caneta.cor_tampa = 'Azul'
+# caneta.cor = 'Pink'
+# caneta.cor_tampa = 'Azul'
 print(caneta.cor)
-print(caneta.cor_tampa)
+# print(caneta.cor_tampa)
 
 # getter -> obter valor
 # print(caneta.cor)
-
-#   Revisar aula para fazer anotações
