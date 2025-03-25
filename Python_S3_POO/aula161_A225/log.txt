@@ -1,0 +1,5 @@
+
+Success: Galaxy S está ligado (Smartphone)
+Error: iPhone está desligado (Smartphone)
+Error: qualquer coisa (LogFileMixin)
+Success: Que legal (LogFileMixin)
