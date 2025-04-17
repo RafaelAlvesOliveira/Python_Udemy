@@ -11,7 +11,7 @@ class Pessoa:
 
 
 if __name__ == '__main__':
-    p1 = Pessoa('Luiz', 'Otávio')
+    p1 = Pessoa('Rafael', 'Alves')
     print(asdict(p1).keys())
     print(asdict(p1).values())
     print(asdict(p1).items())
