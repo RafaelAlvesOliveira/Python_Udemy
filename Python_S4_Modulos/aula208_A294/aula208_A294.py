@@ -4,6 +4,7 @@
 import csv
 from pathlib import Path
 
+# caminho do arquivo CSV
 CAMINHO_CSV = Path(__file__).parent / 'aula208_A294.csv'
 
 lista_clientes = [
@@ -24,12 +25,14 @@ with open(CAMINHO_CSV, 'w') as arquivo:
         print(cliente)
         escritor.writerow(cliente)
 
+# Lista com nomes de clientes fictícios
 # lista_clientes = [
 #     ['Rafael Alves', 'Av. 1, 23'],
 #     ['João Silva', 'R. 3, "4"'],
 #     ['Maria Rosa', 'Av. A, 5A'],
 # ]
 
+# Abrir e escrever informações dentro do arquivo.
 # with open(CAMINHO_CSV, 'w') as arquivo:
 #     # nome_colunas = lista_clientes[0].keys()
 #     nome_colunas = ['Nome', 'Endereço']
