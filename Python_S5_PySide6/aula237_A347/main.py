@@ -1,16 +1,10 @@
 import sys
 
-from PySide6.QtGui import QIcon
-from variables import WINDOW_ICON_PATH
-
 from main_window import MainWindow
-from PySide6.QtWidgets import (QApplication, QLabel)
-
-
-def temp_label(texto):
-    label1 = QLabel(texto)
-    label1.setStyleSheet('font-size: 150px')
-    return label1
+from display import Display
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QApplication
+from variables import WINDOW_ICON_PATH
 
 
 if __name__ == '__main__':
@@ -23,9 +17,10 @@ if __name__ == '__main__':
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
 
-    # label1 = QLabel('O meu texto')
-    # label1.setStyleSheet('font-size: 150px')
-    # window.addWidgetToVLayout(label1)
+    # Display
+    display = Display()
+    display.setPlaceholderText('Digite algo')
+    window.addToVLayout(display)
 
     # Executa tuo
     window.adjustFixedSize()

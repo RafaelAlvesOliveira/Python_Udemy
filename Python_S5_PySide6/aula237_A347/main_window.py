@@ -1,5 +1,5 @@
 
-from PySide6.QtWidgets import (QMainWindow, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
 
 class MainWindow(QMainWindow):
@@ -21,6 +21,6 @@ class MainWindow(QMainWindow):
         # Serve para ajustar o tamanho da janela de acordo com o conteúdo
         self.setFixedSize(self.width(), self.height())
 
-    def addWidgetToVLayout(self, widget: QWidget):
+    def addToVLayout(self, widget: QWidget):
         self.vLayout.addWidget(widget)
         self.adjustFixedSize()
