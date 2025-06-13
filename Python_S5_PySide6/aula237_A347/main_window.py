@@ -21,6 +21,6 @@ class MainWindow(QMainWindow):
         # Serve para ajustar o tamanho da janela de acordo com o conteúdo
         self.setFixedSize(self.width(), self.height())
 
-    def addToVLayout(self, widget: QWidget):
+    def addWidgetToVLayout(self, widget: QWidget):
         self.vLayout.addWidget(widget)
         # self.adjustFixedSize()
