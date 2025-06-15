@@ -14,17 +14,28 @@ class Button(QPushButton):
         # font.setBold(True)
         self.setFont(font)
         self.setMinimumSize(75, 75)
-        self.setProperty('cssClass', 'specialButton')
 
 
 class ButtonsGrid(QGridLayout):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-        self._grid_mask = [
+        self._gridMask = [
             ['C', '◀', '^', '/'],
             ['7', '8', '9', '*'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
             ['',  '0', '.', '='],
         ]
+
+        self._makeGrid()
+
+    def _makeGrid(self):
+        for rowNumber, rowData in enumerate(self._gridMask):
+            for colNumber, button_text in enumerate(rowData):
+                button = Button(button_text)
+
+                if button_text not in '0123456789.':
+                    button.setProperty('cssClass', 'specialButton')
+
+                self.addWidget(button, rowNumber, colNumber)
