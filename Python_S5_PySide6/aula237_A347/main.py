@@ -27,23 +27,13 @@ if __name__ == '__main__':
 
     # Display
     display = Display()
-    display.setPlaceholderText('Digite algo')
+    # display.setPlaceholderText('Digite algo')
     window.addWidgetToVLayout(display)
 
     # Grid
+    # buttonsGrid = ButtonsGrid()   # type: ignore
     buttonsGrid = ButtonsGrid(display)
     window.vLayout.addLayout(buttonsGrid)
-
-    # buttonsGrid.addWidget(Button('9'), 0, 0)
-    # buttonsGrid.addWidget(Button('8'), 0, 1)
-    # buttonsGrid.addWidget(Button('7'), 0, 2)
-    # buttonsGrid.addWidget(Button('6'), 1, 0)
-    # buttonsGrid.addWidget(Button('5'), 1, 1)
-    # buttonsGrid.addWidget(Button('4'), 1, 2)
-    # buttonsGrid.addWidget(Button('3'), 2, 0)
-    # buttonsGrid.addWidget(Button('2'), 2, 1)
-    # buttonsGrid.addWidget(Button('1'), 2, 2)
-    # buttonsGrid.addWidget(Button('0'), 3, 0, 2, 3)
 
     # Executa tudo
     window.adjustFixedSize()
