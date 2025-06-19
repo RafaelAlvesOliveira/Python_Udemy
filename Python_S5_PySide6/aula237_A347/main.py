@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     # Grid
     # buttonsGrid = ButtonsGrid()   # type: ignore
-    buttonsGrid = ButtonsGrid(display)
+    buttonsGrid = ButtonsGrid(display, info)
     window.vLayout.addLayout(buttonsGrid)
 
     # Executa tudo
