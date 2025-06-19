@@ -20,7 +20,7 @@ class Button(QPushButton):
 
 
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: Display, *args, **kwargs) -> None:
+    def __init__(self, display: Display, info, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         self._gridMask = [
@@ -31,6 +31,7 @@ class ButtonsGrid(QGridLayout):
             ['',  '0', '.', '='],
         ]
         self.display = display
+        self.info = info
         self._makeGrid()
 
     def _makeGrid(self):
