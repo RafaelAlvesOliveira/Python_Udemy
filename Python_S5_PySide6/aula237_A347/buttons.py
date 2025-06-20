@@ -4,8 +4,15 @@ from PySide6.QtWidgets import QPushButton, QGridLayout
 from utils import isNumOrDot, isEmpty, isValidNumber
 from variables import MEDIUM_FONT_SIZE
 
+# Prevenção do circular import
+# from typing import TYPE_CHECKING
 
-class Button(QPushButton):
+# if TYPE_CHECKING:
+#     from buttons import Button  # type: ignore
+#     from info import Info
+
+
+class Button(QPushButton):    # type: ignore
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.configStyle()
@@ -20,7 +27,10 @@ class Button(QPushButton):
 
 
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: Display, info, *args, **kwargs) -> None:
+    def __init__(
+            self, display: Display, info, *args, **kwargs
+            # self, display: 'Display', info: 'Info', *args, **kwargs
+    ) -> None:
         super().__init__(*args, **kwargs)
 
         self._gridMask = [
@@ -32,7 +42,17 @@ class ButtonsGrid(QGridLayout):
         ]
         self.display = display
         self.info = info
+        self._equation = ''
         self._makeGrid()
+
+    @property
+    def equation(self):
+        return self._equation
+
+    @equation.setter
+    def equation(self, value):
+        self._equation = value
+        self.info.setText(value)
 
     def _makeGrid(self):
         for rowNumber, rowData in enumerate(self._gridMask):
