@@ -2,7 +2,8 @@ from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QLineEdit
 from utils import isEmpty, isNumOrDot
-from variables import BIG_FONT_SIZE, MINIMUM_WIDTH, TEXT_MARGIN
+from variables import (BIG_FONT_SIZE, SMALL_FONT_SIZE,
+                       MINIMUM_WIDTH, TEXT_MARGIN)
 
 
 class Display(QLineEdit):
@@ -10,6 +11,7 @@ class Display(QLineEdit):
     delPressed = Signal()
     clearPressed = Signal()
     inputPressed = Signal(str)
+    operatorPressed = Signal(str)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +19,7 @@ class Display(QLineEdit):
 
     def configStyle(self):
         margins = [TEXT_MARGIN for _ in range(4)]
-        self.setStyleSheet(f'font-size: {BIG_FONT_SIZE}px;')
+        self.setStyleSheet(f'font-size: {SMALL_FONT_SIZE}px;')
         self.setMinimumHeight(BIG_FONT_SIZE * 2)
         self.setMinimumWidth(MINIMUM_WIDTH)
         self.setAlignment(Qt.AlignmentFlag.AlignRight)
@@ -31,21 +33,32 @@ class Display(QLineEdit):
         isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return, KEYS.Key_Equal]
         isDelete = key in [KEYS.Key_Backspace, KEYS.Key_Delete, KEYS.Key_D]
         isEsc = key in [KEYS.Key_Escape, KEYS.Key_C]
+        isOperator = key in [
+            KEYS.Key_Plus, KEYS.Key_Minus, KEYS.Key_Slash, KEYS.Key_Asterisk,
+            KEYS.Key_P,
+        ]
 
         if isEnter:
-            print(f'EQ {text} pressionado, sinal emitido', type(self).__name__)
+            print(f'EQ {text} pressionado, sinal emitido.',
+                  type(self).__name__)
             self.eqPressed.emit()
             return event.ignore()
 
         if isDelete:
-            print(f'isDelete  {text}  pressionado, sinal emitido',
-                  type(self).__name__)
+            print(f'isDelete {text} pressionado, sinal emitido.', type(
+                self).__name__)
             self.delPressed.emit()
             return event.ignore()
 
         if isEsc:
-            print('isEsc pressionado, sinal emitido', type(self).__name__)
+            print('isEsc pressionado, sinal emitido.', type(self).__name__)
             self.clearPressed.emit()
+            return event.ignore()
+
+        if isOperator:
+            if text.lower() == 'p':
+                text = '^'
+            self.operatorPressed.emit(text)
             return event.ignore()
 
         # Não passar daqui se não tiver texto
@@ -54,7 +67,7 @@ class Display(QLineEdit):
 
         if isNumOrDot(text):
             print(
-                'inputPressed pressionado, sinal emitido', type(self).__name__
+                'inputPressed pressionado, sinal emitido.', type(self).__name__
             )
             self.inputPressed.emit(text)
             return event.ignore()
