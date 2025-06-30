@@ -1,16 +1,15 @@
 import math
-# Prevenção do circular import
-from typing import TYPE_CHECKING   # type: ignore
+from typing import TYPE_CHECKING
 
 from PySide6.QtCore import Slot
-from PySide6.QtWidgets import QPushButton, QGridLayout
-from utils import isNumOrDot, isEmpty, isValidNumber
+from PySide6.QtWidgets import QGridLayout, QPushButton
+from utils import isEmpty, isNumOrDot, isValidNumber
 from variables import MEDIUM_FONT_SIZE
 
 if TYPE_CHECKING:
-    from display import Display  # type: ignore
-    from main_window import MainWindow    # type: ignore
-    from info import Info    # type: ignore
+    from display import Display
+    from info import Info
+    from main_window import MainWindow
 
 
 class Button(QPushButton):
@@ -60,13 +59,18 @@ class ButtonsGrid(QGridLayout):
         self._equation = value
         self.info.setText(value)
 
-    def vouApagarVocê(self):
-        print('Signal recebido por "vouApagarVocê" em', type(self).__name__)
+    def vouApagarVocê(self, *args):
+        print(
+            'Signal recebido por "vouApagarVocê" em',
+            type(self).__name__,
+            args,
+        )
 
     def _makeGrid(self):
         self.display.eqPressed.connect(self.vouApagarVocê)
         self.display.delPressed.connect(self.display.backspace)
         self.display.clearPressed.connect(self.vouApagarVocê)
+        self.display.inputPressed.connect(self.vouApagarVocê)
 
         for rowNumber, rowData in enumerate(self._gridMask):
             for colNumber, buttonText in enumerate(rowData):
@@ -156,20 +160,19 @@ class ButtonsGrid(QGridLayout):
         try:
             if '^' in self.equation and isinstance(self._left, float):
                 result = math.pow(self._left, self._right)
-                # result = eval(self.equation.replace('^', '**'))
             else:
                 result = eval(self.equation)
         except ZeroDivisionError:
             self._showError('Divisão por zero.')
         except OverflowError:
-            self._showError('Essa conta náo pode ser realizada.')
+            self._showError('Essa conta não pode ser realizada.')
 
         self.display.clear()
         self.info.setText(f'{self.equation} = {result}')
         self._left = result
         self._right = None
 
-        if result != 'error':
+        if result == 'error':
             self._left = None
 
     def _makeDialog(self, text):
@@ -182,7 +185,7 @@ class ButtonsGrid(QGridLayout):
         msgBox.setIcon(msgBox.Icon.Critical)
         msgBox.exec()
 
-    def _Info(self, text):
+    def _showInfo(self, text):
         msgBox = self._makeDialog(text)
         msgBox.setIcon(msgBox.Icon.Information)
         msgBox.exec()
