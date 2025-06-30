@@ -1,15 +1,15 @@
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QLineEdit
-from variables import (BIG_FONT_SIZE, SMALL_FONT_SIZE,
-                       MINIMUM_WIDTH, TEXT_MARGIN)
-from utils import isEmpty
+from utils import isEmpty, isNumOrDot
+from variables import BIG_FONT_SIZE, MINIMUM_WIDTH, TEXT_MARGIN
 
 
 class Display(QLineEdit):
     eqPressed = Signal()
     delPressed = Signal()
     clearPressed = Signal()
+    inputPressed = Signal(str)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +17,7 @@ class Display(QLineEdit):
 
     def configStyle(self):
         margins = [TEXT_MARGIN for _ in range(4)]
-        self.setStyleSheet(f'font-size: {SMALL_FONT_SIZE}px;')
+        self.setStyleSheet(f'font-size: {BIG_FONT_SIZE}px;')
         self.setMinimumHeight(BIG_FONT_SIZE * 2)
         self.setMinimumWidth(MINIMUM_WIDTH)
         self.setAlignment(Qt.AlignmentFlag.AlignRight)
@@ -33,19 +33,18 @@ class Display(QLineEdit):
         isEsc = key in [KEYS.Key_Escape, KEYS.Key_C]
 
         if isEnter:
-            print(f'EQ {text} pressionado, sinal emitido.',
-                  type(self).__name__)
+            print(f'EQ {text} pressionado, sinal emitido', type(self).__name__)
             self.eqPressed.emit()
             return event.ignore()
 
         if isDelete:
-            print(f'isDelete {text} pressionado, sinal emitido.', type(
-                self).__name__)
+            print(f'isDelete  {text}  pressionado, sinal emitido',
+                  type(self).__name__)
             self.delPressed.emit()
             return event.ignore()
 
         if isEsc:
-            print('isEsc pressionado, sinal emitido.', type(self).__name__)
+            print('isEsc pressionado, sinal emitido', type(self).__name__)
             self.clearPressed.emit()
             return event.ignore()
 
@@ -53,6 +52,9 @@ class Display(QLineEdit):
         if isEmpty(text):
             return event.ignore()
 
-        print('Texto', text)
-
-        # return super().keyPressEvent(event)
+        if isNumOrDot(text):
+            print(
+                'inputPressed pressionado, sinal emitido', type(self).__name__
+            )
+            self.inputPressed.emit(text)
+            return event.ignore()
