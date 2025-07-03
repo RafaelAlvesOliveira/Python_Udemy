@@ -57,6 +57,7 @@ class Ui_MainWindow(object):
 
         self.buttonSend = QPushButton(self.centralwidget)
         self.buttonSend.setObjectName(u"buttonSend")
+        self.buttonSend.setSizeIncrement(QSize(5, 5))
         self.buttonSend.setFont(font1)
 
         self.gridLayout_2.addWidget(self.buttonSend, 0, 2, 1, 1)
@@ -83,9 +84,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.labelResult.setText(QCoreApplication.translate("MainWindow", u"N\u00e3o tem nada aqui!", None))
-        self.lineName.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Digite seu nome", None))
-        self.labelName.setText(QCoreApplication.translate("MainWindow", u"Seu nome", None))
-        self.buttonSend.setText(QCoreApplication.translate("MainWindow", u"Enviar", None))
+        self.labelResult.setText("")
+        self.lineName.setPlaceholderText(QCoreApplication.translate("MainWindow", u" Digite seu nome", None))
+        self.labelName.setText(QCoreApplication.translate("MainWindow", u"Seu nome:", None))
+        self.buttonSend.setText(QCoreApplication.translate("MainWindow", u" Enviar ", None))
     # retranslateUi
 
