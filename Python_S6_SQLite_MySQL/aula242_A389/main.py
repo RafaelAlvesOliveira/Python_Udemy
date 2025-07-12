@@ -36,7 +36,31 @@ cursor.execute(
     'VALUES '
     '(NULL, "Gabriela", 4), (NULL, "Rafael", 9.9)'
 )
+
+# CUIDADO: SQL Injection
+# sql = (
+#     f'INSERT INTO {TABLE_NAME} '
+#     '(id, name, weight) '
+#     'VALUES '
+#     '(:nome, :peso)'
+# )
+# cursor.executemany(sql, [['Joana', 4], ['Rafael', 5]])
+# cursor.executemany(
+#     sql,
+#     (
+#         ('Joana', 4), ('Rafael', 5)
+#     )
+# )
+# Sintax não reconhecida pelo DBeaver da versão mais recente.
+# cursor.execute(sql, {'nome': 'Sem nome', 'peso': 3})
+# cursor.executemany(sql, (
+#     {'nome': 'Joãozinho', 'peso': 3},
+#     {'nome': 'Maria', 'peso': 2},
+#     {'nome': 'Helena', 'peso': 4},
+#     {'nome': 'Joana', 'peso': 5},
+# ))
 connection.commit()
+# print(sql)
 
 cursor.close()
 connection.close()
