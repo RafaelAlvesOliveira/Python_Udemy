@@ -9,7 +9,7 @@ TABLE_NAME = 'customers'
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
-# Cuidado: fazendo delete sem where
+# CUIDADO: fazendo delete sem where
 cursor.execute(
     f'DELETE FROM {TABLE_NAME}'
 )
@@ -30,37 +30,30 @@ cursor.execute(
 connection.commit()
 
 # Registrar valores nas colunas da tabela
-cursor.execute(
+sql = (
     f'INSERT INTO {TABLE_NAME} '
-    '(id, name, weight) '
+    '(name, weight) '
     'VALUES '
-    '(NULL, "Gabriela", 4), (NULL, "Rafael", 9.9)'
+    '(:nome, :peso)'
 )
-
-# CUIDADO: SQL Injection
-# sql = (
-#     f'INSERT INTO {TABLE_NAME} '
-#     '(id, name, weight) '
-#     'VALUES '
-#     '(:nome, :peso)'
-# )
-# cursor.executemany(sql, [['Joana', 4], ['Rafael', 5]])
+# cursor.execute(sql, ['Joana', 4])
 # cursor.executemany(
 #     sql,
 #     (
-#         ('Joana', 4), ('Rafael', 5)
+#         ('Joana', 4), ('Luiz', 5)
 #     )
 # )
-# Sintax não reconhecida pelo DBeaver da versão mais recente.
-# cursor.execute(sql, {'nome': 'Sem nome', 'peso': 3})
-# cursor.executemany(sql, (
-#     {'nome': 'Joãozinho', 'peso': 3},
-#     {'nome': 'Maria', 'peso': 2},
-#     {'nome': 'Helena', 'peso': 4},
-#     {'nome': 'Joana', 'peso': 5},
-# ))
+cursor.execute(sql, {'nome': 'Sem nome', 'peso': 3})
+cursor.executemany(sql, (
+    {'nome': 'Joãozinho', 'peso': 3},
+    {'nome': 'Maria', 'peso': 2},
+    {'nome': 'Helena', 'peso': 4},
+    {'nome': 'Joana', 'peso': 5},
+))
 connection.commit()
-# print(sql)
 
 cursor.close()
 connection.close()
+
+if __name__ == '__main__':
+    print(sql)
