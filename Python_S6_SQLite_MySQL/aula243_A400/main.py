@@ -34,6 +34,8 @@ with connection:
     connection.commit()
 
     # Começo a inserir dados a partir daqui
+
+    # Inserindo um valor usando placeholder e um iterável
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
@@ -41,8 +43,77 @@ with connection:
             'VALUES '
             '(%s, %s) '
         )
-        data = ('Rafael', '21')
+        data = ('Rafael', 22)
         result = cursor.execute(sql, data)
-        print(sql, data)
-        print(result)
+        # print(sql, data)
+        # print(result)
     connection.commit()
+
+    # Inserindo um valor usando placeholder e um dicionário
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%(name)s, %(age)s) '
+        )
+        data2 = {
+            "name": "Ana",
+            "age": 28,
+        }
+        result = cursor.execute(sql, data2)
+        # print(sql)
+        # print(data2)
+        # print(result)
+    connection.commit()
+
+    # Inserindo vários valores usando placeholder e uma tupla de dicionários
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%(name)s, %(age)s) '
+        )
+        data3 = (
+            {"name": "Sarah", "age": 33, },
+            {"name": "Júlia", "age": 27, },
+            {"name": "Rose", "age": 48, },
+        )
+        result = cursor.executemany(sql, data3)  # type: ignore
+        # print(sql)
+        # print(data3)
+        # print(result)
+    connection.commit()
+
+    # Inserindo vários valores usando placedholder e uma tupla de tuplas
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%s, %s) '
+        )
+        data4 = (
+            ("Mônica", 43, ),
+            ("Letícia", 25, ),
+        )
+        result = cursor.executemany(sql, data4)  # type: ignore
+        # print(sql)
+        # print(data4)
+        # print(result)
+    connection.commit()
+
+    # Lendo os valores com SELECT
+    with connection.cursor() as cursor:
+        sql = (
+            f'SELECT * FROM {TABLE_NAME} '
+        )
+        cursor.execute(sql)  # type: ignore
+        data5 = list(cursor.fetchall())
+
+        for row in data5:
+            print(row)
+
+        for row in data5:
+            print(row)
