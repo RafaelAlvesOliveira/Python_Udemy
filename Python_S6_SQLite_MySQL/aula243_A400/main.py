@@ -3,12 +3,14 @@
 # Pypy: https://pypi.org/project/pymysql/
 # GitHub: https://github.com/PyMySQL/PyMySQL
 import os
+from typing import cast
 
 import dotenv
 import pymysql
 import pymysql.cursors
 
 TABLE_NAME = "customers"
+CURRENT_CURSOR = pymysql.cursors.SSDictCursor
 
 dotenv.load_dotenv()
 
@@ -18,7 +20,8 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor,
+    cursorclass=CURRENT_CURSOR,
+    # cursorclass=pymysql.cursors.SSDictCursor,
 )
 
 with connection:
@@ -144,6 +147,8 @@ with connection:
     # Editando com UPDATE, WHERE e placeholders no PyMySQL
     with connection.cursor() as cursor:
 
+        cursor = cast(CURRENT_CURSOR, cursor)
+
         sql = (
             f'UPDATE {TABLE_NAME} '
             'SET nome=%s, idade=%s '
@@ -152,11 +157,23 @@ with connection:
         cursor.execute(sql, ('Eleonor', 82, 4))
         cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
 
-        # for row in cursor.fetchall():
-        #     _id, name, age = row
-        #     print(_id, name, age)
+        # data6 = cursor.fetchall()
 
-        for row in cursor.fetchall():
-            # print(row['id'])
+        print()
+        print('For 1: ')
+        # for row in data6:
+        for row in cursor.fetchall_unbuffered():
+            print(row)
+
+            if row['id'] >= 5:
+                break
+
+        print()
+        print('For 2: ')
+        cursor.scroll(1)
+        # cursor.scroll(-1)
+        # cursor.scroll(2, 'absolute')
+        # for row in data6:
+        for row in cursor.fetchall_unbuffered():
             print(row)
     connection.commit()
