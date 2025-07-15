@@ -10,7 +10,7 @@ import pymysql
 import pymysql.cursors
 
 TABLE_NAME = "customers"
-CURRENT_CURSOR = pymysql.cursors.SSDictCursor
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -155,25 +155,54 @@ with connection:
             'WHERE id=%s'
         )
         cursor.execute(sql, ('Eleonor', 82, 4))
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
 
-        # data6 = cursor.fetchall()
+        cursor.execute(
+            f'SELECT id FROM {TABLE_NAME} ORDER BY id DESC LIMIT 1'
+        )
 
-        print()
-        print('For 1: ')
-        # for row in data6:
-        for row in cursor.fetchall_unbuffered():
+        resultFromSelect = cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
+        data6 = cursor.fetchall()
+
+        for row in data6:
             print(row)
 
-            if row['id'] >= 5:
-                break
+        print('resultFromSelect', resultFromSelect)
+        print('len(data6)', len(data6))
+        print('rowcount', cursor.rowcount)
 
-        print()
-        print('For 2: ')
-        cursor.scroll(1)
-        # cursor.scroll(-1)
-        # cursor.scroll(2, 'absolute')
-        # for row in data6:
-        for row in cursor.fetchall_unbuffered():
+        # sql = (
+        #     f'INSERT INTO {TABLE_NAME} '
+        #     '(nome, idade) '
+        #     'VALUES '
+        #     '(%s, %s)'
+        # )
+        # data = ('Carolina', 20)
+        # cursor.execute(sql, data)
+
+        # sql = (
+        #     f'INSERT INTO {TABLE_NAME} '
+        #     '(nome, idade) '
+        #     'VALUES '
+        #     '(%(name)s, %(age)s) '
+        # )
+        # data3 = (
+        #     {"name": "Sarah", "age": 33, },
+        #     {"name": "Júlia", "age": 27, },
+        #     {"name": "Rose", "age": 48, },
+        # )
+
+        print('lastrowid', cursor.lastrowid)
+
+        lastIdFromSelect = cursor.fetchone()
+        print(lastIdFromSelect)
+
+        print('lastrowid na mão', lastIdFromSelect)
+
+        cursor.scroll(-2)
+        cursor.scroll(0, 'absolute')
+        print('rownumber', cursor.rownumber)
+        for row in cursor.fetchall():
             print(row)
+
     connection.commit()
